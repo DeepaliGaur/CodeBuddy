@@ -226,19 +226,23 @@
 		}
 
 		/* Air */
-		html.lenis{
+		html.lenis {
 			height: auto;
 		}
-		.lenis.lenis-smooth{
-			scroll-behavior: auto;
+
+		.lenis.lenis-smooth {
+			scroll-behavior: auto !important;
 		}
-		.lenis.lenis-smooth[data-lenis-prevent]{
+
+		.lenis.lenis-smooth [data-lenis-prevent] {
 			overscroll-behavior: contain;
 		}
-		.lenis.lenis-stopped{
+
+		.lenis.lenis-stopped {
 			overflow: hidden;
 		}
-		.lenis.lenis-scrolling iframe{
+
+		.lenis.lenis-scrolling iframe {
 			pointer-events: none;
 		}
 	</style>
@@ -328,15 +332,15 @@
 		<p>&copy; 2023 Adi Purdila. All rights reserved.</p>
 	</footer>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+	<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script> 
 	<script>
 		// Air
 
-		const entry = document.querySelectorAll('.entry');
+		const entries = document.querySelectorAll('.entry');
 
-		entry.forEach(entry=>{
+		entries.forEach(entry=>{
 			let entryMeta = entry.querySelector('.entry__meta')
 			let entryMedia = entry.querySelector('.entry__media')
 
@@ -350,14 +354,15 @@
 				opacity: 0
 			})
 
+// gsap.registerPlugin(ScrollTrigger);
 
 			gsap.to(entryMeta,{
 				srollTrigger:{
 					trigger: entry,
 					start: 'top bottom',
-					bottom: 'bottom 90%',
-					scrub: true,
-					markers: true
+					end: 'bottom 90%',
+					markers: true,
+					scrub: true
 				},
 				xPercent: 0,
 				opacity: 1
@@ -366,7 +371,7 @@
 				srollTrigger:{
 					trigger: entry,
 					start: 'top bottom',
-					bottom: 'bottom 90%',
+					end: 'bottom 90%',
 					markers: true,
 					scrub: true
 				},
@@ -378,14 +383,14 @@
 
 
 
-		const lenis = new Lenis()
-		lenis.on('scroll', ScrollTrigger.update)
 
-		gsap.ticket.add((time)=>{
-			lenis.raf(time*1000)
+		const lenis = new Lenis()
+
+		gsap.ticker.add((time)=>{
+		lenis.raf(time * 1000)
 		})
 
-		gsap.ticket.lagSmoothing(0)
+		gsap.ticker.lagSmoothing(0)
 
 	</script>
 </body>
